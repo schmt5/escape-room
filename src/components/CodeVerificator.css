@@ -1,0 +1,361 @@
+/* ===========================
+   CODE VERIFICATOR STYLES
+   =========================== */
+
+.verificator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* INPUT WRAPPER */
+.inputs-wrapper {
+  z-index: 110;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 3rem;
+  padding: 1rem;
+}
+
+.shake-error {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* CODE INPUTS */
+.code-inputs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.code-input {
+  width: 50px;
+  height: 60px;
+  padding: 0;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+  font-family: 'Monaco', 'Courier New', monospace;
+  transition: all 0.3s ease;
+  cursor: text;
+}
+
+.code-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  background-color: #f0f4ff;
+  transform: scale(1.05);
+}
+
+.code-input:disabled {
+  background-color: #e8e8e8;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.code-input::placeholder {
+  color: #ccc;
+}
+
+/* DOOR CONTAINER */
+.door-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.door-svg-fullscreen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+
+/* SUCCESS SCREEN */
+.success-screen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 200;
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.success-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  letter-spacing: 1px;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+}
+
+.success-badge {
+  font-size: 4rem;
+  margin-top: 1rem;
+}
+
+/* GOLD PARTICLES */
+.gold-particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 150;
+  overflow: hidden;
+}
+
+.gold-particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+/* Tablet (768px and up) */
+@media (min-width: 768px) {
+  .code-input {
+    width: 60px;
+    height: 70px;
+    font-size: 28px;
+  }
+
+  .success-text {
+    font-size: 3rem;
+  }
+
+  .code-inputs {
+    gap: 1rem;
+  }
+}
+
+/* Desktop (1024px and up) */
+@media (min-width: 1024px) {
+  .code-input {
+    width: 70px;
+    height: 80px;
+    font-size: 32px;
+    border-width: 3px;
+  }
+
+  .code-input:focus {
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+    transform: scale(1.1);
+  }
+
+  .success-text {
+    font-size: 3.5rem;
+  }
+
+  .door-container {
+    max-width: 350px;
+    height: 400px;
+  }
+
+  .gold-particle {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Small devices (< 480px) */
+@media (max-width: 480px) {
+  .verificator-container {
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  .code-input {
+    width: 45px;
+    height: 55px;
+    font-size: 20px;
+    border: 1.5px solid #333;
+  }
+
+  .code-inputs {
+    gap: 0.3rem;
+  }
+
+  .success-text {
+    font-size: 1.8rem;
+  }
+
+  .success-badge {
+    font-size: 3rem;
+  }
+
+  .door-container {
+    max-width: 250px;
+    height: 300px;
+  }
+
+  .gold-particle {
+    width: 8px;
+    height: 8px;
+  }
+
+  .code-input:focus {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+  }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .code-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 8px;
+  }
+
+  .code-input:focus {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+/* High density displays */
+@media (min-width: 1440px) {
+  .code-input {
+    width: 80px;
+    height: 90px;
+    font-size: 36px;
+  }
+
+  .success-text {
+    font-size: 4rem;
+  }
+
+  .door-container {
+    max-width: 400px;
+    height: 450px;
+  }
+}
+
+/* Landscape orientation */
+@media (max-height: 600px) and (orientation: landscape) {
+  .verificator-container {
+    min-height: auto;
+    height: 100vh;
+    gap: 1rem;
+  }
+
+  .code-input {
+    width: 45px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .door-container {
+    max-width: 200px;
+    height: 250px;
+  }
+
+  .success-text {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .success-badge {
+    font-size: 2rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .verificator-container {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  }
+
+  .code-input {
+    background-color: #2a2a3e;
+    color: #fff;
+    border-color: #667eea;
+  }
+
+  .code-input:focus {
+    background-color: #3a3a4e;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+  }
+
+  .door-svg {
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6));
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .code-input {
+    transition: none;
+  }
+
+  .code-input:focus {
+    transform: none;
+  }
+
+  .success-text {
+    animation: none;
+  }
+}
