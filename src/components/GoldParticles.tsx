@@ -1,19 +1,25 @@
 import { motion } from 'motion/react';
 import { useMemo } from 'react';
 
+type ParticleShape = 'circle' | 'large' | 'diamond';
+
 export default function GoldParticles() {
   const particles = useMemo(() => {
-    const particleCount = Math.random() * 150 + 200; // 200-350 particles
+    const particleCount = Math.random() * 100 + 180;
+    const shapes: ParticleShape[] = ['circle', 'large', 'diamond'];
     return Array.from({ length: Math.floor(particleCount) }, (_, i) => ({
       id: i,
-      startX: Math.random() * 100, // 0-100% horizontal
+      startX: Math.random() * 100,
       startY: -10,
-      delay: Math.random() * 0.3, // Staggered start
-      duration: Math.random() * 1.5 + 2.5, // 2.5-4 seconds
+      delay: Math.random() * 0.5,
+      duration: Math.random() * 2 + 2.5,
+      shape: shapes[i % 8 === 0 ? 1 : i % 5 === 0 ? 2 : 0],
+      drift: (Math.random() - 0.5) * 150,
+      scale: Math.random() * 0.5 + 0.6,
+      rotation: Math.random() * 540,
     }));
   }, []);
 
-  const getRandomRotation = () => Math.random() * 360;
   const getRandomEndY = () => window.innerHeight + 100;
 
   return (
@@ -21,18 +27,21 @@ export default function GoldParticles() {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="gold-particle"
+          className={`gold-particle${
+            particle.shape === 'large' ? ' gold-particle--large' :
+            particle.shape === 'diamond' ? ' gold-particle--diamond' : ''
+          }`}
           initial={{
             left: `${particle.startX}%`,
             top: `${particle.startY}px`,
             opacity: 1,
-            scale: Math.random() * 0.5 + 0.75, // 0.75-1.25
+            scale: particle.scale,
           }}
           animate={{
             top: `${getRandomEndY()}px`,
             opacity: 0,
-            rotate: getRandomRotation(),
-            x: (Math.random() - 0.5) * 100, // Slight horizontal drift
+            rotate: particle.rotation,
+            x: particle.drift,
           }}
           transition={{
             duration: particle.duration,

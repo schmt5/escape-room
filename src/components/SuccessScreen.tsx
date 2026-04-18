@@ -4,6 +4,7 @@ export default function SuccessScreen() {
   return (
     <div className="success-screen">
       <motion.div
+        className="success-backdrop"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{
@@ -14,6 +15,7 @@ export default function SuccessScreen() {
         }}
       >
         <h1 className="success-text">Bravo, vous avez réussi</h1>
+        <p className="success-subtitle">Porte déverrouillée</p>
         <motion.div
           className="success-badge"
           animate={{ y: [0, -10, 0] }}
